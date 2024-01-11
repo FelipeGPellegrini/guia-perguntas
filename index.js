@@ -20,7 +20,7 @@ app.get("/perguntar", (req, res) => {
 app.post("/salvarpergunta", (req, res) => {
     let titulo = req.body.titulo
     let desc = req.body.descricao
-    res.send(`Formulário recebido. ${titulo} descrição: ${desc}`)
+    res.send(`Formulário recebido.Título: ${titulo} \n Descrição: ${desc}`)
 })
 
 app.listen(8000, () => {
