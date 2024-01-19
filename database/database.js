@@ -7,3 +7,4 @@ const connection = new Sequelize('guiaperguntas','root','22112004', {
 
 module.exports = connection
 
+   

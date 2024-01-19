@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser")
 const connection = require("./database/database")
-const perguntaModel = require("./database/Pergunta")
+const Pergunta = require("./database/Pergunta")
 // DATABASE
 
 connection
@@ -22,7 +22,12 @@ app.use(bodyParser.json()) // opcional
 
 
 app.get("/", (req, res) => {
-    res.render("index")
+    Pergunta.findAll({ raw: true }).then(perguntas => {
+        res.render("index", {
+            perguntas
+        })
+    }) // Equivalente ao a SELECT ALL FROM ... 
+    
 })
 
 app.get("/perguntar", (req, res) => {
@@ -31,8 +36,13 @@ app.get("/perguntar", (req, res) => {
 
 app.post("/salvarpergunta", (req, res) => {
     let titulo = req.body.titulo // tem q ser o mesmo name q foi setado no form
-    let desc = req.body.descricao // tem q ser o mesmo name q foi setado no form
-    res.send(`Formulário recebido.Título: ${titulo} \n Descrição: ${desc}`)
+    let descricao = req.body.descricao // tem q ser o mesmo name q foi setado no form
+    Pergunta.create({
+        titulo: titulo,
+        descricao: descricao
+    }).then(() => {
+        res.redirect("/")
+    }) // O método create é o equivalente a INSERT IN TO ...
 })
 
 app.listen(8000, () => {
