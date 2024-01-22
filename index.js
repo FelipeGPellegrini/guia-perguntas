@@ -41,9 +41,11 @@ app.get("/perguntar", (req, res) => {
 })
 
 app.post("/salvarpergunta", (req, res) => {
+    let name = req.body.name 
     let titulo = req.body.titulo // tem q ser o mesmo name q foi setado no form
     let descricao = req.body.descricao // tem q ser o mesmo name q foi setado no form
     Pergunta.create({
+        name: name,
         titulo: titulo,
         descricao: descricao
     }).then(() => {
