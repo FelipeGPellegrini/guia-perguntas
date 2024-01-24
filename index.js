@@ -89,5 +89,5 @@ app.post("/responder", (req, res) => {
 })
 
 app.listen(8000, () => {
-    console.log("App rodando!!")
+    console.log("App rodando!")
 })
